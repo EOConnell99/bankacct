@@ -1,48 +1,6 @@
-class BankAccount:
-    bank_title = "Chase" #Should be the same across all accounts methinks
-    def __init__(self, name, balance, minimum_balance, account_number, routing_number):
-        self.name = name
-        self.balance = balance
-        self.minimum_balance = minimum_balance
-        self._account_number = account_number
-        self.__routing_number = routing_number
-    def deposit(self, amount):
-        self.balance += amount
-    def withdraw(self, amount):
-        if self.balance - amount > self.minimum_balance:
-            self.balance -= amount
-        else:
-            print("Insufficient balance")
-    def print_customer_information(self):
-        print("Bank Name: " + self.bank_title + ", Customer Name: " + self.name + ", Balance: " + str(self.balance) + ", Minimum Balance: " + str(self.minimum_balance))
-
-
-class SavingsAccount(BankAccount):
-    def __init__(self, name, balance, minimum_balance, account_number, routing_number, interest_rate):
-        super().__init__(name, balance, minimum_balance, account_number, routing_number)
-        self.interest_rate = interest_rate
-
-    def apply_interest(self):
-        interest_amount = self.balance * self.interest_rate
-        self.balance += interest_amount
-class LimitedCheckingAccount(BankAccount):
-    def __init__(self, name, balance, minimum_balance, account_number, routing_number,  max_transfer):
-        super().__init__(name, balance, minimum_balance, account_number, routing_number)
-        self.max_transfer = max_transfer
-
-    def deposit(self, amount):
-        if amount > self.max_transfer:
-            print("Deposit is too high")
-        else:
-            self.balance += amount
-
-    def withdraw(self, amount):
-        if amount > self.max_transfer:
-            print("Withdraw amount exceeds the allowed limit.")
-        elif self.balance - amount < self.minimum_balance:
-            print("Insufficient balance.")
-        else:
-            self.balance -= amount
+from bank_account import BankAccount
+from savings import SavingsAccount
+from checking import LimitedCheckingAccount
 
 p1 = BankAccount("John", 20000, 2000)
 p2 = BankAccount("Jeremy", 5000, 0)
