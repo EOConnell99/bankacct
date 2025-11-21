@@ -1,9 +1,11 @@
 class BankAccount:
     bank_title = "Chase" #Should be the same across all accounts methinks
-    def __init__(self, name, balance, minimum_balance):
+    def __init__(self, name, balance, minimum_balance, account_number, routing_number):
         self.name = name
         self.balance = balance
         self.minimum_balance = minimum_balance
+        self._account_number = account_number
+        self.__routing_number = routing_number
     def deposit(self, amount):
         self.balance += amount
     def withdraw(self, amount):
@@ -16,16 +18,16 @@ class BankAccount:
 
 
 class SavingsAccount(BankAccount):
-    def __init__(self, name, balance, minimum_balance, interest_rate):
-        super().__init__(name, balance, minimum_balance)
+    def __init__(self, name, balance, minimum_balance, account_number, routing_number, interest_rate):
+        super().__init__(name, balance, minimum_balance, account_number, routing_number)
         self.interest_rate = interest_rate
 
     def apply_interest(self):
         interest_amount = self.balance * self.interest_rate
         self.balance += interest_amount
 class LimitedCheckingAccount(BankAccount):
-    def __init__(self, name, balance, minimum_balance, max_transfer):
-        super().__init__(name, balance, minimum_balance)
+    def __init__(self, name, balance, minimum_balance, account_number, routing_number,  max_transfer):
+        super().__init__(name, balance, minimum_balance, account_number, routing_number)
         self.max_transfer = max_transfer
 
     def deposit(self, amount):
